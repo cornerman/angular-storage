@@ -10,29 +10,6 @@ angular.module('angular-storage',
       'angular-storage.store'
     ]);
 
-angular.module('angular-storage.cookieStorage', [])
-  .service('cookieStorage', ["$injector", function ($injector) {
-    if ($injector.has('$cookieStore')) {
-      var $cookieStore = $injector.get('$cookieStore');
-
-      this.set = function (what, value) {
-        return $cookieStore.put(what, value);
-      };
-
-      this.get = function (what) {
-        return $cookieStore.get(what);
-      };
-
-      this.remove = function (what) {
-        return $cookieStore.remove(what);
-      };
-    } else {
-      this.set = function() {};
-      this.get = function() {};
-      this.remove = function() {};
-    }
-  }]);
-
 angular.module('angular-storage.internalStore', ['angular-storage.localStorage', 'angular-storage.sessionStorage'])
   .factory('InternalStore', ["$log", "$injector", function($log, $injector) {
 
@@ -79,7 +56,7 @@ angular.module('angular-storage.internalStore', ['angular-storage.localStorage',
     };
 
     InternalStore.prototype.remove = function(name) {
-      this.inMemoryCache[name] = null;
+      delete this.inMemoryCache[name];
       this.storage.remove(this.getNamespacedKey(name));
     };
 
@@ -87,7 +64,7 @@ angular.module('angular-storage.internalStore', ['angular-storage.localStorage',
   }]);
 
 
-angular.module('angular-storage.localStorage', ['angular-storage.cookieStorage'])
+angular.module('angular-storage.localStorage', ['angular-storage.noStorage'])
   .service('localStorage', ["$window", "$injector", function ($window, $injector) {
     var localStorageAvailable;
 
@@ -112,15 +89,22 @@ angular.module('angular-storage.localStorage', ['angular-storage.cookieStorage']
         return $window.localStorage.removeItem(what);
       };
     } else {
-      var cookieStorage = $injector.get('cookieStorage');
+      var noStorage = $injector.get('noStorage');
 
-      this.set = cookieStorage.set;
-      this.get = cookieStorage.get;
-      this.remove = cookieStorage.remove;
+      this.set = noStorage.set;
+      this.get = noStorage.get;
+      this.remove = noStorage.remove;
     }
   }]);
 
-angular.module('angular-storage.sessionStorage', ['angular-storage.cookieStorage'])
+angular.module('angular-storage.noStorage', [])
+  .service('noStorage', function () {
+    this.set = function() {};
+    this.get = function() {};
+    this.remove = function() {};
+  });
+
+angular.module('angular-storage.sessionStorage', ['angular-storage.noStorage'])
   .service('sessionStorage', ["$window", "$injector", function ($window, $injector) {
     if ($window.sessionStorage) {
       this.set = function (what, value) {
@@ -135,11 +119,11 @@ angular.module('angular-storage.sessionStorage', ['angular-storage.cookieStorage
         return $window.sessionStorage.removeItem(what);
       };
     } else {
-      var cookieStorage = $injector.get('cookieStorage');
+      var noStorage = $injector.get('noStorage');
 
-      this.set = cookieStorage.set;
-      this.get = cookieStorage.get;
-      this.remove = cookieStorage.remove;
+      this.set = noStorage.set;
+      this.get = noStorage.get;
+      this.remove = noStorage.remove;
     }
   }]);
 

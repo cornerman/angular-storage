@@ -44,7 +44,7 @@ angular.module('angular-storage.internalStore', ['angular-storage.localStorage',
     };
 
     InternalStore.prototype.remove = function(name) {
-      this.inMemoryCache[name] = null;
+      delete this.inMemoryCache[name];
       this.storage.remove(this.getNamespacedKey(name));
     };
 

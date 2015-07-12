@@ -1,4 +1,4 @@
-angular.module('angular-storage.localStorage', ['angular-storage.cookieStorage'])
+angular.module('angular-storage.localStorage', ['angular-storage.noStorage'])
   .service('localStorage', function ($window, $injector) {
     var localStorageAvailable;
 
@@ -23,10 +23,10 @@ angular.module('angular-storage.localStorage', ['angular-storage.cookieStorage']
         return $window.localStorage.removeItem(what);
       };
     } else {
-      var cookieStorage = $injector.get('cookieStorage');
+      var noStorage = $injector.get('noStorage');
 
-      this.set = cookieStorage.set;
-      this.get = cookieStorage.get;
-      this.remove = cookieStorage.remove;
+      this.set = noStorage.set;
+      this.get = noStorage.get;
+      this.remove = noStorage.remove;
     }
   });

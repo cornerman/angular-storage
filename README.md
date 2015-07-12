@@ -1,10 +1,10 @@
 # angular-storage
 
-A Storage done right for AngularJS.
+A Storage done right for AngularJS (fork without cookie fallback)
 
 ## Key Features
 
-* Uses **`localStorage` by default but if it's not available, it uses `ngCookies`**.
+* Uses **`localStorage` by default but if it's not available, it just relies on in-memory caching**.
 * Lets you **save JS Objects**
 * If **you save a `Number`, you get a `Number`**, not a String
 * Uses a **caching system** so that if you already have a value, it won't get it from the store again.

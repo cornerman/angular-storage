@@ -1,4 +1,4 @@
-angular.module('angular-storage.sessionStorage', ['angular-storage.cookieStorage'])
+angular.module('angular-storage.sessionStorage', ['angular-storage.noStorage'])
   .service('sessionStorage', function ($window, $injector) {
     if ($window.sessionStorage) {
       this.set = function (what, value) {
@@ -13,10 +13,10 @@ angular.module('angular-storage.sessionStorage', ['angular-storage.cookieStorage
         return $window.sessionStorage.removeItem(what);
       };
     } else {
-      var cookieStorage = $injector.get('cookieStorage');
+      var noStorage = $injector.get('noStorage');
 
-      this.set = cookieStorage.set;
-      this.get = cookieStorage.get;
-      this.remove = cookieStorage.remove;
+      this.set = noStorage.set;
+      this.get = noStorage.get;
+      this.remove = noStorage.remove;
     }
   });
