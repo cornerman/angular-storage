@@ -11,18 +11,8 @@ A Storage done right for AngularJS (fork without cookie fallback)
 
 ## Installing it
 
-You have several options:
-
 ````bash
-bower install a0-angular-storage
-````
-
-````bash
-npm install angular-storage
-````
-
-````html
-<script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
+bower install angular-storage-no-cookies
 ````
 
 ## Using it
@@ -91,10 +81,6 @@ Deletes the saved `value` with the key `name`
 
 Returns a new `store` service that will use the `namespace` and `delimiter` when saving and getting values like the following `namespace[delimiter]key`. For example `auth0.object` considering `auth0` as `namespace` and `.` as a `delimiter`
 
-## Usages
-
-This library is used in [auth0-angular](https://github.com/auth0/auth0-angular)
-
 ## Contributing
 
 Just clone the repo, run `npm install`, `bower install` and then `gulp` to work :).
@@ -106,23 +92,4 @@ If you have found a bug or if you have a feature request, please report them at 
 ## License
 
 MIT
-
-## What is Auth0?
-
-Auth0 helps you to:
-
-* Add authentication with [multiple authentication sources](https://docs.auth0.com/identityproviders), either social like **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce, amont others**, or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS or any SAML Identity Provider**.
-* Add authentication through more traditional **[username/password databases](https://docs.auth0.com/mysql-connection-tutorial)**.
-* Add support for **[linking different user accounts](https://docs.auth0.com/link-accounts)** with the same user.
-* Support for generating signed [Json Web Tokens](https://docs.auth0.com/jwt) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when and where users are logging in.
-* Pull data from other sources and add it to the user profile, through [JavaScript rules](https://docs.auth0.com/rules).
-
-## Create a free account in Auth0
-
-1. Go to [Auth0](https://auth0.com) and click Sign Up.
-2. Use Google, GitHub or Microsoft Account to login.
-
-
-
 

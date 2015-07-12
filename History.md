@@ -1,3 +1,7 @@
+0.0.11 / 2015-07-12
+===================
+
+  * Remove cookie fallback, use localstorage or fallback to in-memory caching
 
 0.0.11 / 2015-05-18
 ===================
