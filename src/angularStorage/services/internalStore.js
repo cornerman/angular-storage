@@ -6,6 +6,7 @@ angular.module('angular-storage.internalStore', ['angular-storage.localStorage',
       this.delimiter = delimiter || '.';
       this.inMemoryCache = {};
       this.storage = $injector.get(storage || 'localStorage');
+      this.storageAvailable = this.storage.storageAvailable;
     }
 
     InternalStore.prototype.getNamespacedKey = function(key) {

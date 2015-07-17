@@ -1,16 +1,14 @@
 angular.module('angular-storage.localStorage', ['angular-storage.noStorage'])
   .service('localStorage', function ($window, $injector) {
-    var localStorageAvailable;
-
     try {
       $window.localStorage.setItem('testKey', 'test');
       $window.localStorage.removeItem('testKey');
-      localStorageAvailable = true;
+      this.storageAvailable = true;
     } catch(e) {
-      localStorageAvailable = false;
+      this.storageAvailable = false;
     }
 
-    if (localStorageAvailable) {
+    if (this.storageAvailable) {
       this.set = function (what, value) {
         return $window.localStorage.setItem(what, value);
       };

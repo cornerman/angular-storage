@@ -81,6 +81,10 @@ Deletes the saved `value` with the key `name`
 
 Returns a new `store` service that will use the `namespace` and `delimiter` when saving and getting values like the following `namespace[delimiter]key`. For example `auth0.object` considering `auth0` as `namespace` and `.` as a `delimiter`
 
+### store.storageAvailable
+
+Indicates whether localStorage/sessionStorage is available or whether the fallback is active.
+
 ## Contributing
 
 Just clone the repo, run `npm install`, `bower install` and then `gulp` to work :).

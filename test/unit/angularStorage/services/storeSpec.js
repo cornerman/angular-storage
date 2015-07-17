@@ -80,6 +80,10 @@ describe('angularStorage storeProvider.setStore("sessionStorage")', function () 
     });
   });
 
+  it('should set store.storageAvailable correctly', inject(function(store) {
+    expect(store.storageAvailable).to.equal(true);
+  }));
+
   it('should save items correctly in the sessionStorage', inject(function(store, $window) {
     var value = 99;
     store.set('gonto123', value);
@@ -110,6 +114,10 @@ describe('angularStorage storeProvider.setStore("sessionStorage")', function () 
     });
   });
 
+  it('should set store.storageAvailable correctly', inject(function(store) {
+    expect(store.storageAvailable).to.equal(false);
+  }));
+
   it('should fallback to in-memory caching', inject(function(store) {
     var value = 99;
     store.set('gonto123', value);
@@ -130,6 +138,10 @@ describe('angularStorage storeProvider.setStore("localStorage")', function () {
       provider.setStore('localStorage');
     });
   });
+
+  it('should set store.storageAvailable correctly', inject(function(store) {
+    expect(store.storageAvailable).to.equal(true);
+  }));
 
   it('should save items correctly in the localStorage', inject(function(store, $window) {
     var value = 55;
@@ -209,6 +221,10 @@ describe('angularStorage store: in-memory caching fallback', function() {
   beforeEach(module('angular-storage.store', function ($provide) {
       windowMock = { localStorage: undefined };
       $provide.value('$window', windowMock);
+  }));
+
+  it('should set store.storageAvailable correctly', inject(function(store) {
+    expect(store.storageAvailable).to.equal(false);
   }));
 
   it('should save items correctly in localStorage', inject(function(store) {

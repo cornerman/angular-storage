@@ -18,6 +18,7 @@ angular.module('angular-storage.internalStore', ['angular-storage.localStorage',
       this.delimiter = delimiter || '.';
       this.inMemoryCache = {};
       this.storage = $injector.get(storage || 'localStorage');
+      this.storageAvailable = this.storage.storageAvailable;
     }
 
     InternalStore.prototype.getNamespacedKey = function(key) {
@@ -66,17 +67,15 @@ angular.module('angular-storage.internalStore', ['angular-storage.localStorage',
 
 angular.module('angular-storage.localStorage', ['angular-storage.noStorage'])
   .service('localStorage', ["$window", "$injector", function ($window, $injector) {
-    var localStorageAvailable;
-
     try {
       $window.localStorage.setItem('testKey', 'test');
       $window.localStorage.removeItem('testKey');
-      localStorageAvailable = true;
+      this.storageAvailable = true;
     } catch(e) {
-      localStorageAvailable = false;
+      this.storageAvailable = false;
     }
 
-    if (localStorageAvailable) {
+    if (this.storageAvailable) {
       this.set = function (what, value) {
         return $window.localStorage.setItem(what, value);
       };
@@ -106,7 +105,9 @@ angular.module('angular-storage.noStorage', [])
 
 angular.module('angular-storage.sessionStorage', ['angular-storage.noStorage'])
   .service('sessionStorage', ["$window", "$injector", function ($window, $injector) {
-    if ($window.sessionStorage) {
+    this.storageAvailable = !!$window.sessionStorage;
+
+    if (this.storageAvailable) {
       this.set = function (what, value) {
         return $window.sessionStorage.setItem(what, value);
       };
