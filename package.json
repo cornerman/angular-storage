@@ -1,6 +1,6 @@
 {
   "name": "angular-storage-no-cookies",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "main": "index.js",
   "author": {
     "name": "Martin Gontovnikas",

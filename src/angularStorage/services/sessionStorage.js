@@ -1,6 +1,12 @@
 angular.module('angular-storage.sessionStorage', ['angular-storage.noStorage'])
   .service('sessionStorage', function ($window, $injector) {
-    this.storageAvailable = !!$window.sessionStorage;
+    try {
+      $window.sessionStorage.setItem('testKey', 'test');
+      $window.sessionStorage.removeItem('testKey');
+      this.storageAvailable = true;
+    } catch(e) {
+      this.storageAvailable = false;
+    }
 
     if (this.storageAvailable) {
       this.set = function (what, value) {
